@@ -11,10 +11,14 @@ X<-rbind(X_train,X_test)
 features<-read.table("./FUCI HAR Dataset/UCI HAR Dataset/features.txt")
 mean_std_ind<-grep("mean|std",features[,2])
 only_mean_std_in_X<-X[,mean_std_ind]
-colnames(only_mean_std_in_X)<-features[mean_std_ind,2]
+names<-features[mean_std_ind,2]
+names<-gsub('-mean','Mean',names)
+names<-gsub('-std','Std',names)
+names<-gsub('[-()]','',names)
+colnames(only_mean_std_in_X)<-names
 
 
-
+library(data.table)
 
 # Reading the activity labels
 activity_labels<-read.table("./FUCI HAR Dataset/UCI HAR Dataset/activity_labels.txt")
@@ -36,4 +40,5 @@ subject_activity_mean_std<-cbind(subject,y,only_mean_std_in_X)
 # Finding the mean for each subject and each activity
 DT<-data.table(subject_activity_mean_std)
 Data<- DT[, lapply(.SD, mean), by=c("subject", "activity")]
+write.table(Data,"tidy.txt")
 }
