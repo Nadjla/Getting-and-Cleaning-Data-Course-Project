@@ -1,0 +1,14 @@
+First the files "X_train","X_test" are read into tables X_train and X_test.
+Then these files are binded together.
+Then the features are read into a table called features.
+Those features that include "mean" or "std" are identified.
+The indices of the mean or std features are used to extract the related data from the binded data.
+The names of the features are edited.
+
+In the next part, the activity labels are read into a table. Those labels in y_train and y_test are also imported.
+The same processes are done for the subjects.
+The subjects from y_train and y_test are binded into y.
+Then it is named "activity".
+In the "subject_activity_mean_std" the subject, activity labels and the related data are binded together.
+
+In the final step the standard deviation and mean of the data based on the subject and activity is computed. 
